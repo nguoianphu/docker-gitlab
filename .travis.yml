@@ -7,23 +7,24 @@ script:
   - docker build -t gitlab .
   - docker images
   - echo "Run local image"
-  - sudo ulimit -c 0
-  - sudo ulimit -d unlimited
-  - sudo ulimit -e 0
-  - sudo ulimit -f unlimited
-  - sudo ulimit -i 62793
-  - sudo ulimit -l 64
-  - sudo ulimit -m unlimited
+  - sudo sh -c "ulimit -c 0"
+  - sudo sh -c "ulimit -d unlimited"
+  - sudo sh -c "ulimit -e 0"
+  - sudo sh -c "ulimit -f unlimited"
+  - sudo sh -c "ulimit -i 62793"
+  - sudo sh -c "ulimit -l 64"
+  - sudo sh -c "ulimit -m unlimited"
     # WARNING: Increasing the global file descriptor limit increases RAM
     # consumption on startup dramatically!
-  - sudo ulimit -n 50000
-  - sudo ulimit -q 819200
-  - sudo ulimit -r 0
-  - sudo ulimit -s 10240
-  - sudo ulimit -t unlimited
-  - sudo ulimit -u unlimited
-  - sudo ulimit -v unlimited
-  - sudo ulimit -x unlimited  
+  - sudo sh -c "ulimit -n 50000"
+  - sudo sh -c "ulimit -q 819200"
+  - sudo sh -c "ulimit -r 0"
+  - sudo sh -c "ulimit -s 10240"
+  - sudo sh -c "ulimit -t unlimited"
+  - sudo sh -c "ulimit -u unlimited"
+  - sudo sh -c "ulimit -v unlimited"
+  - sudo sh -c "ulimit -x unlimited"
+  - sudo sysctl -w vm.overcommit_memory=1
   - docker run --name my-gitlab -d -p 9090:80 gitlab
   - echo "Wait gitlab to start up"    
   - sleep 30

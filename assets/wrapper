@@ -67,8 +67,7 @@ mkdir -p /var/log/gitlab/sshd
 # Start service manager
 echo "Starting services..."
 # GITLAB_OMNIBUS_CONFIG= /opt/gitlab/embedded/bin/runsvdir-start &
-PATH=/opt/gitlab/bin:/opt/gitlab/embedded/bin:/usr/local/bin:/usr/local/sbin:/bi
-n:/sbin:/usr/bin:/usr/sbin
+PATH=/opt/gitlab/bin:/opt/gitlab/embedded/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
 
 # Configure gitlab package
 # WARNING:
