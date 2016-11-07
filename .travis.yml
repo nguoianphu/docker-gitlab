@@ -25,7 +25,16 @@ script:
   - sudo sh -c "ulimit -v unlimited"
   # - sudo sh -c "ulimit -x unlimited"
   - sudo sysctl -w vm.overcommit_memory=1
-  - docker run --name my-gitlab -d -p 9090:80 gitlab
+  # - docker run --name my-gitlab -d -p 9090:80 gitlab
+  - sudo docker run --detach \
+    --hostname localhost \
+    --publish 443:443 --publish 80:80 --publish 22:22 \
+    --name gitlab \
+    --restart always \
+    --volume /srv/gitlab/config:/etc/gitlab \
+    --volume /srv/gitlab/logs:/var/log/gitlab \
+    --volume /srv/gitlab/data:/var/opt/gitlab \
+    gitlab
   - echo "Wait gitlab to start up"    
   - sleep 30
   - docker ps -a  
@@ -33,7 +42,7 @@ script:
   - docker exec -it my-gitlab ps -ef
   - echo "Checking gitlab"
   - docker exec -it my-gitlab netstat -anlp
-  - curl http://localhost:9090/
+  - curl http://localhost/
   - docker stop my-gitlab
   - echo "Testing public image on Docker Hub"
   - docker run -d -p 9090:80  --name nguoianphu-gitlab nguoianphu/docker-gitlab
