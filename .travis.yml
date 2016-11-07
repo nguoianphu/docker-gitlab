@@ -1,0 +1,30 @@
+sudo: required
+services:
+  - docker
+
+script:
+  - echo "Build local image"
+  - docker build -t gitlab .
+  - docker images
+  - echo "Run local image"
+  # https://github.com/docker-library/elasticsearch/issues/98#issuecomment-254656216
+  - sudo sysctl -w vm.max_map_count=262144
+  - docker run --name my-gitlab -d -p 8088:80 -p 443:443 gitlab
+  - docker ps -a
+  - echo "Wait gitlab to start up"    
+  - sleep 30
+  - docker logs my-gitlab
+  - docker exec -it my-gitlab ps -ef
+  - echo "Checking gitlab"
+  - curl http://localhost:8088/
+  - docker stop my-gitlab
+  - echo "Testing public image on Docker Hub"
+  - docker run -d -p 8088:80 -p 443:443 --name nguoianphu-gitlab nguoianphu/docker-gitlab
+  - docker ps -a
+  - docker images  
+  - sleep 30  
+  - docker logs nguoianphu-gitlab
+  - docker exec -it nguoianphu-gitlab ps -ef
+  - echo "Checking gitlab"
+  - curl http://localhost:8088
+  - docker stop nguoianphu-gitlab
