@@ -23,6 +23,7 @@ COPY RELEASE /
 COPY assets/ /assets/
 RUN chmod +x RELEASE \
  && chmod +x /assets/setup.sh \
+ && chmod +x /assets/wrapper \
  && sync \
  && /assets/setup.sh
 
