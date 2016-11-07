@@ -3,7 +3,7 @@
 set -xe
 
 source /etc/lsb-release
-# source /RELEASE
+source /RELEASE
 
 # Download & Install GitLab
 echo "deb https://packages.gitlab.com/gitlab/${PACKAGECLOUD_REPO}/ubuntu/ ${DISTRIB_CODENAME} main" > /etc/apt/sources.list.d/gitlab_${RELEASE_PACKAGE}.list

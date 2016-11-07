@@ -65,8 +65,8 @@ ln -s /opt/gitlab/sv/sshd /opt/gitlab/service
 mkdir -p /var/log/gitlab/sshd
 
 # Start service manager
-echo "Starting services..."
-GITLAB_OMNIBUS_CONFIG= /opt/gitlab/embedded/bin/runsvdir-start &
+# echo "Starting services..."
+# GITLAB_OMNIBUS_CONFIG= /opt/gitlab/embedded/bin/runsvdir-start &
 
 # Configure gitlab package
 # WARNING:

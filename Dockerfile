@@ -2,10 +2,6 @@ FROM ubuntu:16.04
 
 MAINTAINER Tuan Vo <vohungtuan@gmail.com>
 
-ENV RELEASE_VERSION 8.0.2-ee.1
-ENV PACKAGECLOUD_REPO gitlab-ee
-ENV RELEASE_PACKAGE gitlab-ee
-
 # Install required packages
 RUN apt-get update -q \
     && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
@@ -23,10 +19,11 @@ RUN rm -rf /etc/update-motd.d /etc/motd /etc/motd.dynamic
 RUN ln -fs /dev/null /run/motd.dynamic
 
 # Copy assets
-# COPY RELEASE /
+COPY RELEASE /
 COPY assets/ /assets/
-RUN chmod +x /assets/setup \
- && /assets/setup
+RUN chmod +x RELEASE \
+ && chmod +x /assets/setup.sh \
+ && ./assets/setup.sh
 
 # Allow to access embedded tools
 ENV PATH /opt/gitlab/embedded/bin:/opt/gitlab/bin:/assets:$PATH
