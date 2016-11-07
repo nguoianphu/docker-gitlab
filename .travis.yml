@@ -27,13 +27,8 @@ script:
   - sudo sysctl -w vm.overcommit_memory=1
   # - docker run --name my-gitlab -d -p 9090:80 gitlab
   - sudo docker run --detach \
-    --hostname localhost \
     --publish 443:443 --publish 80:80 --publish 22:22 \
-    --name gitlab \
-    --restart always \
-    --volume /srv/gitlab/config:/etc/gitlab \
-    --volume /srv/gitlab/logs:/var/log/gitlab \
-    --volume /srv/gitlab/data:/var/opt/gitlab \
+    --name my-gitlab \
     gitlab
   - echo "Wait gitlab to start up"    
   - sleep 30
