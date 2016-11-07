@@ -23,7 +23,8 @@ COPY RELEASE /
 COPY assets/ /assets/
 RUN chmod +x RELEASE \
  && chmod +x /assets/setup.sh \
- && ./assets/setup.sh
+ && sync \
+ && /assets/setup.sh
 
 # Allow to access embedded tools
 ENV PATH /opt/gitlab/embedded/bin:/opt/gitlab/bin:/assets:$PATH
